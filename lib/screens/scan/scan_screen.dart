@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ScanScreen extends StatelessWidget {
   const ScanScreen({super.key});
 
   Future<void> _takePhoto(BuildContext context) async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? photo = await picker.pickImage(source: ImageSource.camera);
-
-    if (photo != null) {
-      // You can pass the photo path to the scanning screen
-      Navigator.pushNamed(
-        context,
-        '/scanning',
-        arguments: photo.path,
-      );
-    }
+    // Stubbed function since image_picker is removed
+    // For now, just navigate directly without picking an image
+    Navigator.pushNamed(
+      context,
+      '/scanning',
+      arguments: "dummy_photo_path.jpg", // placeholder
+    );
   }
 
   @override

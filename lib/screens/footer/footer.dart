@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class Footer extends StatelessWidget {
@@ -5,51 +6,39 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 90,
-      padding: const EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
+    return ClipRRect(
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          height: 90,
+          padding: const EdgeInsets.only(bottom: 20),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.1),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _footerButton(context, icon: Icons.home, route: '/home'),
+              _footerButton(context, icon: Icons.build, route: '/tools'),
+              _footerButton(context,
+                  icon: Icons.qr_code_scanner, route: '/scan-card'),
+              _footerButton(context,
+                  icon: Icons.bar_chart, route: '/lease-detail'),
+              _footerButton(context, icon: Icons.person, route: '/login'),
+            ],
+          ),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.home, color: Colors.white),
-            onPressed: () {
-              Navigator.pushNamed(context, '/home');
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.build, color: Colors.white),
-            onPressed: () {
-              Navigator.pushNamed(context, '/tools');
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
-            onPressed: () {
-              Navigator.pushNamed(context, '/scan-card');
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.bar_chart, color: Colors.white),
-            onPressed: () {
-              Navigator.pushNamed(context, '/stats');
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.person, color: Colors.white),
-            onPressed: () {
-              Navigator.pushNamed(context, '/login');
-            },
-          ),
-        ],
-      ),
+    );
+  }
+
+  Widget _footerButton(BuildContext context,
+      {required IconData icon, required String route}) {
+    return IconButton(
+      icon: Icon(icon, color: Colors.white),
+      onPressed: () => Navigator.pushNamed(context, route),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:erent_flutter/screens/home/home_screen.dart';
+import 'package:erent_flutter/screens/leasedetail/detailpage/detailpage_screen.dart';
+import 'package:erent_flutter/screens/leasedetail/leasedetail_screen.dart';
 import 'package:erent_flutter/screens/login/login_screen.dart';
 import 'package:erent_flutter/screens/scan/scan_screen.dart';
 import 'package:erent_flutter/screens/signup/signup_screen.dart';
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomeScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/scan-card': (context) => const ScanScreen(),
+        '/lease-detail': (context) => const LeasePageScreen(),
+        '/leaseDetail': (context) => const DetailPageScreen(),
       },
     );
   }
