@@ -6,7 +6,28 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Background
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: Center(
+          // ensures vertical centering
+          child: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1), // subtle background
+              shape: BoxShape.circle,
+            ),
+            child: IconButton(
+              padding: EdgeInsets.zero, // removes internal padding
+              icon: const Icon(Icons.arrow_back_ios_new,
+                  color: Colors.white, size: 18),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+        ),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -20,7 +41,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               // Title
               const Padding(
-                padding: EdgeInsets.only(left: 24.0, top: 60),
+                padding: EdgeInsets.only(left: 24.0, top: 20),
                 child: Text(
                   "Sign In",
                   style: TextStyle(
@@ -33,7 +54,7 @@ class LoginScreen extends StatelessWidget {
 
               // Subtitle
               const Padding(
-                padding: EdgeInsets.only(left: 24.0, top: 16),
+                padding: EdgeInsets.only(left: 24.0, top: 8),
                 child: Text(
                   "Log In To Unlock More.",
                   style: TextStyle(
@@ -43,142 +64,143 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
 
-              const Spacer(),
+              const SizedBox(height: 20),
 
               // Glass card form
-              Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                decoration: BoxDecoration(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(28)),
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.black.withOpacity(0.1),
-                      const Color.fromARGB(255, 34, 8, 60).withOpacity(0.6),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.45),
-                      blurRadius: 40,
-                      offset: const Offset(0, -4),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(28)),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black.withOpacity(0.1),
+                        const Color.fromARGB(255, 34, 8, 60).withOpacity(0.6),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
-                  ],
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // Email input
-                      _buildInputField(
-                        label: "Email",
-                        hint: "Email Address",
-                        icon: "assets/images/userid.png",
-                        obscure: false,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.45),
+                        blurRadius: 40,
+                        offset: const Offset(0, -4),
                       ),
-
-                      // Password input
-                      _buildInputField(
-                        label: "Password",
-                        hint: "Password",
-                        icon: "assets/images/passwordicon.png",
-                        obscure: true,
-                      ),
-
-                      // Forgot password
-                      const Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          "Forgot Password",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                            decoration: TextDecoration.underline,
-                          ),
+                    ],
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        // Email input
+                        _buildInputField(
+                          label: "Email",
+                          hint: "Email Address",
+                          icon: "assets/images/userid.png",
+                          obscure: false,
                         ),
-                      ),
 
-                      const SizedBox(height: 24),
-
-                      // Sign In button
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            backgroundColor: Colors.deepPurple,
-                            foregroundColor: Colors.white,
-                          ),
-                          onPressed: () {},
-                          child: const Text("Sign In"),
+                        // Password input
+                        _buildInputField(
+                          label: "Password",
+                          hint: "Password",
+                          icon: "assets/images/passwordicon.png",
+                          obscure: true,
                         ),
-                      ),
 
-                      const SizedBox(height: 32),
-
-                      // Divider
-                      const Row(
-                        children: [
-                          Expanded(child: Divider(color: Colors.grey)),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
-                              "Or continue with",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 14),
+                        // Forgot password
+                        const Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Forgot Password",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 14,
+                              decoration: TextDecoration.underline,
                             ),
                           ),
-                          Expanded(child: Divider(color: Colors.grey)),
-                        ],
-                      ),
+                        ),
 
-                      const SizedBox(height: 24),
+                        const SizedBox(height: 16),
 
-                      // Social icons
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset("assets/images/applelogin.png",
-                              width: 60, height: 60),
-                          Image.asset("assets/images/googlelogin.png",
-                              width: 60, height: 60),
-                          Image.asset("assets/images/facebooklogin.png",
-                              width: 60, height: 60),
-                        ],
-                      ),
-
-                      const SizedBox(height: 40),
-
-                      // Signup link
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Don’t have an account? ",
-                            style: TextStyle(color: Colors.grey),
+                        // Sign In button
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24),
+                              ),
+                              backgroundColor: Colors.deepPurple,
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: () {},
+                            child: const Text("Sign In"),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              // Navigate to SignUp screen
-                              Navigator.pushNamed(context, '/signup');
-                            },
-                            child: const Text(
-                              "Create One",
-                              style: TextStyle(
-                                color: Colors.purpleAccent,
-                                decoration: TextDecoration.underline,
+                        ),
+
+                        const SizedBox(height: 20),
+
+                        // Divider
+                        const Row(
+                          children: [
+                            Expanded(child: Divider(color: Colors.grey)),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                "Or continue with",
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 14),
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                            Expanded(child: Divider(color: Colors.grey)),
+                          ],
+                        ),
+
+                        const SizedBox(height: 20),
+
+                        // Social icons
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset("assets/images/applelogin.png",
+                                width: 50, height: 50),
+                            Image.asset("assets/images/googlelogin.png",
+                                width: 50, height: 50),
+                            Image.asset("assets/images/facebooklogin.png",
+                                width: 50, height: 50),
+                          ],
+                        ),
+
+                        const SizedBox(height: 24),
+
+                        // Signup link
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Don’t have an account? ",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/signup');
+                              },
+                              child: const Text(
+                                "Create One",
+                                style: TextStyle(
+                                  color: Colors.purpleAccent,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -197,12 +219,12 @@ class LoginScreen extends StatelessWidget {
     required bool obscure,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: const TextStyle(color: Colors.grey)),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           Container(
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.1),
@@ -232,18 +254,6 @@ class LoginScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  /// Social login button
-  Widget _socialIcon(String asset) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white.withOpacity(0.1),
-      ),
-      child: Image.asset(asset, width: 40, height: 40),
     );
   }
 }

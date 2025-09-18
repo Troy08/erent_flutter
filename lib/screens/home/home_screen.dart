@@ -8,6 +8,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // extendBodyBehindAppBar: true, // background flows behind AppBar
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   leading: IconButton(
+      //     icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+      //     onPressed: () => Navigator.pop(context),
+      //   ),
+      // ),
       backgroundColor: const Color(0xFF1F003D),
       body: Stack(
         children: [
@@ -22,20 +31,24 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 20),
 
-                    // Featured Collections
-                    Row(
-                      children: const [
-                        Icon(Icons.favorite, color: Colors.white),
-                        SizedBox(width: 8),
-                        Text(
-                          'Featured Collections',
-                          style: TextStyle(
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.favorite, color: Colors.white),
+                          SizedBox(width: 8),
+                          Text(
+                            'Featured Collections',
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 22,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+
                     const SizedBox(height: 12),
                     SizedBox(
                       height: 260,
@@ -142,19 +155,13 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Search',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold),
-                  ),
                   const SizedBox(height: 12),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
                         color: const Color(0xFF2A0044),
                         borderRadius: BorderRadius.circular(24)),
+                    margin: const EdgeInsets.only(top: 10),
                     child: Row(
                       children: const [
                         Icon(Icons.search, color: Colors.white),
