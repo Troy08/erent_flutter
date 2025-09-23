@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:erent_flutter/screens/footer/footer.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,21 +7,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // extendBodyBehindAppBar: true, // background flows behind AppBar
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      //   leading: IconButton(
-      //     icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-      //     onPressed: () => Navigator.pop(context),
-      //   ),
-      // ),
       backgroundColor: const Color(0xFF1F003D),
       body: Stack(
         children: [
           // Scrollable Content
           Padding(
-            padding: const EdgeInsets.only(top: 150, bottom: 80),
+            padding: EdgeInsets.only(
+              top: 150,
+              bottom: MediaQuery.of(context).padding.bottom,
+            ),
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -31,6 +24,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 20),
 
+                    // Featured Collections
                     Container(
                       margin: const EdgeInsets.only(top: 20),
                       child: Row(
@@ -48,7 +42,6 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     const SizedBox(height: 12),
                     SizedBox(
                       height: 260,
@@ -196,7 +189,9 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const Footer(),
+      // bottomNavigationBar: const Footer(
+      //   currentRoute: '/home',
+      // )
     );
   }
 

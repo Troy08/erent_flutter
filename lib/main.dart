@@ -1,10 +1,14 @@
-import 'package:erent_flutter/screens/home/home_screen.dart';
-import 'package:erent_flutter/screens/leasedetail/detailpage/detailpage_screen.dart';
-import 'package:erent_flutter/screens/leasedetail/leasedetail_screen.dart';
-import 'package:erent_flutter/screens/login/login_screen.dart';
-import 'package:erent_flutter/screens/scan/scan_screen.dart';
-import 'package:erent_flutter/screens/signup/signup_screen.dart';
+import 'package:erent_flutter/screens/footer/footer.dart';
+import 'package:erent_flutter/screens/shippingAddress/editAddress_screen.dart';
+import 'package:erent_flutter/screens/shippingAddress/shippingAddress_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:erent_flutter/screens/home/home_screen.dart';
+import 'package:erent_flutter/screens/profile/profile_screen.dart';
+import 'package:erent_flutter/screens/scan/scan_screen.dart';
+import 'package:erent_flutter/screens/login/login_screen.dart';
+import 'package:erent_flutter/screens/signup/signup_screen.dart';
+import 'package:erent_flutter/screens/leasedetail/leasedetail_screen.dart';
+import 'package:erent_flutter/screens/leasedetail/detailpage/detailpage_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,16 +26,61 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // choose your start screen here:
-      initialRoute: '/home', // or '/home', '/signup', etc.
+      home: const MainScreen(), // 👈 central screen with footer
       routes: {
         '/login': (context) => const LoginScreen(),
-        '/home': (context) => const HomeScreen(),
         '/signup': (context) => const SignUpScreen(),
-        '/scan-card': (context) => const ScanScreen(),
-        '/lease-detail': (context) => const LeasePageScreen(),
         '/leaseDetail': (context) => const DetailPageScreen(),
+        '/shippingAddress': (context) => const ShippingAddressScreen(),
+        '/editShippingAddress': (context) => const EditShippingAddressScreen(),
       },
+    );
+  }
+}
+
+/// Central screen with footer + tabs
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = const [
+    HomeScreen(),
+    Placeholder(color: Colors.orange), // Tools screen placeholder
+    ScanScreen(),
+    LeasePageScreen(), // Market screen placeholder
+    ProfileScreen(),
+  ];
+
+  final List<String> _routes = [
+    '/home',
+    '/tools',
+    '/scan',
+    '/lease-detail',
+    '/profile',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        // keeps state alive
+        index: _currentIndex,
+        children: _pages,
+      ),
+      bottomNavigationBar: Footer(
+        currentRoute: _routes[_currentIndex],
+        onItemSelected: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:erent_flutter/screens/footer/footer.dart';
 import 'package:flutter/material.dart';
 
 class LeasePageScreen extends StatefulWidget {
@@ -263,7 +262,7 @@ class _LeasePageScreenState extends State<LeasePageScreen> {
               ),
 
               // Footer
-              const Footer(),
+              // const Footer(currentRoute: '/lease-detail'),
             ],
           ),
         ),

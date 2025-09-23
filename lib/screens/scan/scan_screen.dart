@@ -41,7 +41,7 @@ class ScanScreen extends StatelessWidget {
 
       body: Stack(
         children: [
-          // Background with gradient overlay + image
+          // Background image + gradient
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -59,7 +59,7 @@ class ScanScreen extends StatelessWidget {
             ),
           ),
 
-          // Content
+          // Centered content
           Column(
             children: [
               const SizedBox(height: 147),
@@ -75,20 +75,23 @@ class ScanScreen extends StatelessWidget {
                 ),
               ),
               const Spacer(),
+            ],
+          ),
 
-              // Button fixed at bottom
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Center(
-                  child: SizedBox(
-                    width: 315,
-                    height: 50,
-                    child:
-                        _TakePhotoButton(onPressed: () => _takePhoto(context)),
-                  ),
+          // Button fixed at bottom
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 60, // margin from bottom
+            child: Center(
+              child: SizedBox(
+                width: 315,
+                height: 50,
+                child: _TakePhotoButton(
+                  onPressed: () => _takePhoto(context),
                 ),
               ),
-            ],
+            ),
           ),
         ],
       ),
@@ -105,7 +108,7 @@ class _TakePhotoButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.zero, // remove extra padding
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -121,6 +124,8 @@ class _TakePhotoButton extends StatelessWidget {
         ),
         child: Container(
           alignment: Alignment.center,
+          width: double.infinity,
+          height: double.infinity, // fill the SizedBox height
           child: const Text(
             "Take a Photo",
             style: TextStyle(

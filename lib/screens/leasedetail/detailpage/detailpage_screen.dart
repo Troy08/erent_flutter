@@ -1,4 +1,3 @@
-import 'package:erent_flutter/screens/footer/footer.dart';
 import 'package:erent_flutter/screens/leasedetail/leasebuyout/pricechart_screen.dart';
 import 'package:erent_flutter/screens/leasedetail/propertygrid/propertygrid_screen.dart';
 import 'package:flutter/material.dart';
