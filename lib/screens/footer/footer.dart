@@ -18,56 +18,56 @@ class Footer extends StatelessWidget {
         activeIcon: 'assets/icons/home-icon.png',
         inactiveIcon: 'assets/icons/home-outlined-icon.png',
         route: '/home',
-        size: 28,
       ),
       _FooterItem(
         activeIcon: 'assets/icons/hammer-icon.png',
         inactiveIcon: 'assets/icons/hammer-icon.png',
         route: '/tools',
-        size: 28,
       ),
       _FooterItem(
         activeIcon: 'assets/icons/footer-scan.png',
         inactiveIcon: 'assets/icons/footer-scan.png',
         route: '/scan',
         isCenter: true,
-        size: 190, // bigger scan icon
       ),
       _FooterItem(
         activeIcon: 'assets/icons/bars-filled.png',
         inactiveIcon: 'assets/icons/bars-icon.png',
         route: '/lease-detail',
-        size: 28,
       ),
       _FooterItem(
         activeIcon: 'assets/icons/user-filled.png',
         inactiveIcon: 'assets/icons/user-icon.png',
         route: '/profile',
-        size: 28,
       ),
     ];
 
     return Stack(
-      clipBehavior: Clip.none,
       alignment: Alignment.bottomCenter,
+      clipBehavior: Clip.none,
       children: [
-        /// Solid background (fixes white corners)
-        Container(
-          height: 80,
-          color: const Color(0xFF190028), // match your page background
-        ),
-
-        /// Background footer bar with rounded top & blur
+        /// Glassy background bar
         ClipRRect(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            filter: ImageFilter.blur(
+                sigmaX: 20, sigmaY: 20), // blur value here is up to 20 only
             child: Container(
-              height: 80,
+              height: 75,
               decoration: BoxDecoration(
-                color: const Color(0xFF2C0050).withOpacity(0.8),
+                color: const Color.fromARGB(255, 118, 80, 158)
+                    .withOpacity(0.1), // match Figma overlay (20%)
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(30)),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF292782)
+                        .withOpacity(0.1), // Drop shadow color from Figma
+                    offset: const Offset(0, -5), // X: 0, Y: -5
+                    blurRadius: 30,
+                    spreadRadius: 0,
+                  ),
+                ],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -82,15 +82,11 @@ class Footer extends StatelessWidget {
 
                   return GestureDetector(
                     onTap: () => onItemSelected(index),
-                    child: SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: Image.asset(
-                        isSelected ? item.activeIcon : item.inactiveIcon,
-                        color: isSelected ? Colors.white : Colors.white70,
-                        width: item.size,
-                        height: item.size,
-                      ),
+                    child: Image.asset(
+                      isSelected ? item.activeIcon : item.inactiveIcon,
+                      width: 42,
+                      height: 42,
+                      color: isSelected ? Colors.white : Colors.white70,
                     ),
                   );
                 }).toList(),
@@ -101,15 +97,15 @@ class Footer extends StatelessWidget {
 
         /// Floating scan icon
         Positioned(
-          top: -100,
+          top: -75, // half of 150
           child: GestureDetector(
             onTap: () => onItemSelected(2),
             child: Image.asset(
               currentRoute == '/scan'
                   ? items[2].activeIcon
                   : items[2].inactiveIcon,
-              width: items[2].size,
-              height: items[2].size,
+              width: 150,
+              height: 150,
               fit: BoxFit.contain,
             ),
           ),
@@ -124,13 +120,11 @@ class _FooterItem {
   final String inactiveIcon;
   final String route;
   final bool isCenter;
-  final double size;
 
   const _FooterItem({
     required this.activeIcon,
     required this.inactiveIcon,
     required this.route,
-    required this.size,
     this.isCenter = false,
   });
 }
