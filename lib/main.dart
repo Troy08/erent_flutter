@@ -1,4 +1,8 @@
+import 'package:erent_flutter/screens/deliveryoptions/confirmation_screen.dart';
+import 'package:erent_flutter/screens/deliveryoptions/deliveryOptions_screen.dart';
 import 'package:erent_flutter/screens/footer/footer.dart';
+import 'package:erent_flutter/screens/leasedetail/sublease/sublease_screen.dart';
+import 'package:erent_flutter/screens/redeemform/redeemForm_screen.dart';
 import 'package:erent_flutter/screens/shippingAddress/editAddress_screen.dart';
 import 'package:erent_flutter/screens/shippingAddress/shippingAddress_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +32,13 @@ class MyApp extends StatelessWidget {
       ),
       home: const MainScreen(), // 👈 central screen with footer
       routes: {
-        '/login': (context) => const LoginScreen(),
+        '/login': (context) => const SubLeaseScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/leaseDetail': (context) => const DetailPageScreen(),
         '/shippingAddress': (context) => const ShippingAddressScreen(),
         '/editShippingAddress': (context) => const EditShippingAddressScreen(),
+        '/redeemForm': (context) => const RedeemScreen(),
+        '/confirmation': (context) => const ConfirmationScreen(),
       },
     );
   }
@@ -68,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF190028),
+      backgroundColor: const Color.fromARGB(0, 255, 255, 255),
       body: IndexedStack(
         // keeps state alive
         index: _currentIndex,
