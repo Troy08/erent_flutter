@@ -48,7 +48,7 @@ class Footer extends StatelessWidget {
       children: [
         /// Glassy background bar
         ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+          // borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
           child: BackdropFilter(
             filter: ImageFilter.blur(
                 sigmaX: 20, sigmaY: 20), // blur value here is up to 20 only
@@ -57,8 +57,8 @@ class Footer extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 118, 80, 158)
                     .withOpacity(0.1), // match Figma overlay (20%)
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(30)),
+                // borderRadius:
+                //     const BorderRadius.vertical(top: Radius.circular(30)),
                 boxShadow: [
                   BoxShadow(
                     color: const Color(0xFF292782)

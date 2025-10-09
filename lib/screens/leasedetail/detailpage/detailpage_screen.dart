@@ -246,8 +246,9 @@ class DetailPageScreen extends StatelessWidget {
                 const PriceChart(),
 
                 // PropertyGrid
-                const PropertyGrid(),
-
+                Center(
+                  child: PropertyGrid(),
+                ),
                 // Footer placeholder
               ],
             ),
