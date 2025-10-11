@@ -77,7 +77,7 @@ class DetailPageScreen extends StatelessWidget {
                 // Card image
                 Container(
                   height: 400,
-                  margin: const EdgeInsets.only(bottom: 30),
+                  margin: const EdgeInsets.only(bottom: 30,top: 50),
                   child: Image.asset(
                     card["image"],
                     fit: BoxFit.contain,
@@ -193,11 +193,7 @@ class DetailPageScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () => goToBuyOutDetail({
-                          "name": "Eevee",
-                          "price": 30.45,
-                          "category": "Number1",
-                        }),
+                        onPressed: () => Navigator.pushNamed(context, "/sublease"),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(

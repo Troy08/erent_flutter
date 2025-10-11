@@ -48,14 +48,10 @@ class HomeScreen extends StatelessWidget {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          _buildCard(
-                              'assets/cards/pokemon-card.png', 'Pokemon Card'),
-                          _buildCard(
-                              'assets/cards/nba-card.png', 'NBA Sports Card'),
-                          _buildCard(
-                              'assets/cards/pokemon-card.png', 'Pokemon Card'),
-                          _buildCard(
-                              'assets/cards/nba-card.png', 'NBA Sports Card'),
+                          _buildCard(context, 'assets/cards/pokemon-card.png', 'Pokemon Card'),
+                          _buildCard(context, 'assets/cards/nba-card.png', 'NBA Sports Card'),
+                          _buildCard(context, 'assets/cards/pokemon-card.png', 'Pokemon Card'),
+                          _buildCard(context, 'assets/cards/nba-card.png', 'NBA Sports Card'),
                         ],
                       ),
                     ),
@@ -82,22 +78,10 @@ class HomeScreen extends StatelessWidget {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: const [
-                          TrendCard(
-                              title: 'Pokemon',
-                              percent: '33.79%',
-                              isGreen: true),
-                          TrendCard(
-                              title: 'Basketball',
-                              percent: '5.79%',
-                              isGreen: false),
-                          TrendCard(
-                              title: 'Pokemon',
-                              percent: '33.79%',
-                              isGreen: true),
-                          TrendCard(
-                              title: 'Basketball',
-                              percent: '5.79%',
-                              isGreen: false),
+                          TrendCard(title: 'Pokemon', percent: '33.79%', isGreen: true),
+                          TrendCard(title: 'Basketball', percent: '5.79%', isGreen: false),
+                          TrendCard(title: 'Pokemon', percent: '33.79%', isGreen: true),
+                          TrendCard(title: 'Basketball', percent: '5.79%', isGreen: false),
                         ],
                       ),
                     ),
@@ -121,14 +105,10 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 12),
                     Column(
                       children: [
-                        _buildHotCard(
-                            'assets/cards/hot-card.png', 'Eevee', 355.02),
-                        _buildHotCard(
-                            'assets/cards/hot-card.png', 'Eevee', 355.02),
-                        _buildHotCard(
-                            'assets/cards/hot-card.png', 'Eevee', 355.02),
-                        _buildHotCard(
-                            'assets/cards/hot-card.png', 'Eevee', 355.02),
+                        _buildHotCard(context, 'assets/cards/hot-card.png', 'Eevee', 355.02),
+                        _buildHotCard(context, 'assets/cards/hot-card.png', 'Eevee', 355.02),
+                        _buildHotCard(context, 'assets/cards/hot-card.png', 'Eevee', 355.02),
+                        _buildHotCard(context, 'assets/cards/hot-card.png', 'Eevee', 355.02),
                       ],
                     ),
                   ],
@@ -189,99 +169,110 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      // bottomNavigationBar: const Footer(
-      //   currentRoute: '/home',
-      // )
     );
   }
 
   // Featured Card Builder
-  static Widget _buildCard(String image, String title) {
-    return Container(
-      width: 200,
-      margin: const EdgeInsets.only(right: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3))
-        ],
-      ),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(24),
-            child:
-                Image.asset(image, fit: BoxFit.cover, width: 200, height: 260),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(24),
-                    bottomRight: Radius.circular(24)),
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [
-                    Colors.black.withOpacity(0.7),
-                    Colors.black.withOpacity(0.3),
-                    Colors.transparent,
-                  ],
+  static Widget _buildCard(BuildContext context, String image, String title) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, "/leaseDetail");
+      },
+      borderRadius: BorderRadius.circular(24),
+      child: Container(
+        width: 200,
+        margin: const EdgeInsets.only(right: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: const [
+            BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3))
+          ],
+        ),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Image.asset(image, fit: BoxFit.cover, width: 200, height: 260),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(24),
+                      bottomRight: Radius.circular(24)),
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      Colors.black.withOpacity(0.7),
+                      Colors.black.withOpacity(0.3),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+                child: Center(
+                  child: Text(title,
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
               ),
-              child: Center(
-                child: Text(title,
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   // Hot Card Builder
-  static Widget _buildHotCard(String image, String name, double price) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-          color: Colors.white24, borderRadius: BorderRadius.circular(24)),
-      child: Row(
-        children: [
-          Image.asset(image, width: 80, height: 80, fit: BoxFit.cover),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    const Icon(Icons.attach_money,
-                        color: Colors.white, size: 20),
-                    Flexible(
-                      child: Text(price.toStringAsFixed(2),
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 18),
-                          overflow: TextOverflow.ellipsis),
-                    ),
-                  ],
-                ),
-              ],
+  static Widget _buildHotCard(BuildContext context, String image, String name, double price) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(24),
+      onTap: () {
+        Navigator.pushNamed(context, "/leaseDetail");
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+            color: Colors.white24, borderRadius: BorderRadius.circular(24)),
+        child: Row(
+          children: [
+            Image.asset(image, width: 80, height: 80, fit: BoxFit.cover),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                       Image.asset(
+                                      "assets/icons/dollar-icon.png",
+                                      width: 20,
+                                      height: 20,
+                                    ),
+                                      SizedBox(width: 5),
+                      Flexible(
+                        child: Text(price.toStringAsFixed(2),
+                            style: const TextStyle(color: Colors.white, fontSize: 18),
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -315,46 +306,54 @@ class TrendCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
+    return InkWell(
       borderRadius: BorderRadius.circular(16),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
-          width: 160,
-          margin: const EdgeInsets.only(right: 16),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white10,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18)),
-              const Spacer(),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(percent,
-                        style: TextStyle(
-                            color:
-                                isGreen ? Colors.greenAccent : Colors.redAccent,
-                            fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis),
-                  ),
-                  const SizedBox(width: 8),
-                  Icon(isGreen ? Icons.trending_up : Icons.trending_down,
-                      color: isGreen ? Colors.greenAccent : Colors.redAccent),
-                ],
-              )
-            ],
+      onTap: () {
+        // Navigate to details screen, you can pass title as argument
+        Navigator.pushNamed(context, '/leaseDetail');
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            width: 160,
+            margin: const EdgeInsets.only(right: 16),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white10,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18)),
+                const Spacer(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(percent,
+                          style: TextStyle(
+                              color:
+                                  isGreen ? Colors.greenAccent : Colors.redAccent,
+                              fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                    const SizedBox(width: 8),
+                    Icon(isGreen ? Icons.trending_up : Icons.trending_down,
+                        color: isGreen ? Colors.greenAccent : Colors.redAccent),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+

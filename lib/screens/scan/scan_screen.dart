@@ -1,42 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ScanScreen extends StatelessWidget {
   const ScanScreen({super.key});
 
   Future<void> _takePhoto(BuildContext context) async {
-    // Stubbed function since image_picker is removed
-    // For now, just navigate directly without picking an image
-    Navigator.pushNamed(
-      context,
-      '/scanning',
-      arguments: "dummy_photo_path.jpg", // placeholder
-    );
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      // Open the camera
+      final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+
+      if (photo != null) {
+        // Navigate to scanning screen with the photo path
+        Navigator.pushNamed(
+          context,
+          '/scanning',
+          arguments: photo.path,
+        );
+      } else {
+        // User cancelled
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No photo captured')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true, // background flows behind AppBar
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Center(
-          // ensures vertical centering
-          child: Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1), // subtle background
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              padding: EdgeInsets.zero, // removes internal padding
-              icon: const Icon(Icons.arrow_back_ios_new,
-                  color: Colors.white, size: 18),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
-        ),
+        leading: null,
       ),
 
       body: Stack(
@@ -82,7 +84,7 @@ class ScanScreen extends StatelessWidget {
           Positioned(
             left: 0,
             right: 0,
-            bottom: 60, // margin from bottom
+            bottom: 60,
             child: Center(
               child: SizedBox(
                 width: 315,
@@ -108,7 +110,7 @@ class _TakePhotoButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.zero, // remove extra padding
+        padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -125,7 +127,7 @@ class _TakePhotoButton extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           width: double.infinity,
-          height: double.infinity, // fill the SizedBox height
+          height: double.infinity,
           child: const Text(
             "Take a Photo",
             style: TextStyle(

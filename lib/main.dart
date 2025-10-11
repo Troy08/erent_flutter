@@ -13,6 +13,9 @@ import 'package:erent_flutter/screens/login/login_screen.dart';
 import 'package:erent_flutter/screens/signup/signup_screen.dart';
 import 'package:erent_flutter/screens/leasedetail/leasedetail_screen.dart';
 import 'package:erent_flutter/screens/leasedetail/detailpage/detailpage_screen.dart';
+import 'package:erent_flutter/screens/leasedetail/leasebuyout/leasebuyout_screen.dart';
+import 'package:erent_flutter/screens/deliveryoptions/confirmation_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -32,13 +35,16 @@ class MyApp extends StatelessWidget {
       ),
       home: const MainScreen(), // 👈 central screen with footer
       routes: {
-        '/login': (context) => const SubLeaseScreen(),
+        '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/leaseDetail': (context) => const DetailPageScreen(),
         '/shippingAddress': (context) => const ShippingAddressScreen(),
         '/editShippingAddress': (context) => const EditShippingAddressScreen(),
         '/redeemForm': (context) => const RedeemScreen(),
         '/confirmation': (context) => const ConfirmationScreen(),
+        '/sublease': (context) => const SubLeaseScreen(),
+        '/buyoutDetail': (context) => const BuyoutScreen(),
+        '/orderConfirmation': (context) => const ConfirmationScreen(),
       },
     );
   }

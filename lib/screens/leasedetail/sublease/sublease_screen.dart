@@ -215,6 +215,7 @@ class _SubLeaseScreenState extends State<SubLeaseScreen> {
                                   ),
                                 ),
                               );
+                              Navigator.pushNamed(context, "/orderConfirmation");
                             }
                           : null,
                       style: ElevatedButton.styleFrom(
