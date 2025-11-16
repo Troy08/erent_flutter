@@ -15,6 +15,9 @@ import 'package:erent_flutter/screens/leasedetail/leasedetail_screen.dart';
 import 'package:erent_flutter/screens/leasedetail/detailpage/detailpage_screen.dart';
 import 'package:erent_flutter/screens/leasedetail/leasebuyout/leasebuyout_screen.dart';
 import 'package:erent_flutter/screens/deliveryoptions/confirmation_screen.dart';
+import 'package:erent_flutter/screens/searchScreen/searchPage_Screen.dart';
+import 'package:erent_flutter/screens/scan/carddetected_screen.dart';
+import 'package:erent_flutter/screens/leasedetail/leasebuyout/leaseplaced_screen.dart';
 
 
 void main() {
@@ -45,6 +48,9 @@ class MyApp extends StatelessWidget {
         '/sublease': (context) => const SubLeaseScreen(),
         '/buyoutDetail': (context) => const BuyoutScreen(),
         '/orderConfirmation': (context) => const ConfirmationScreen(),
+        '/searchPage': (context) => const SearchPageScreen(),
+        '/cardsDetected': (context) => const CardsDetectedScreen(),
+        '/leasePlaced': (context) => const LeasePlacedScreen(),
       },
     );
   }

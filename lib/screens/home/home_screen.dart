@@ -6,6 +6,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController searchController = TextEditingController();
+
     return Scaffold(
       backgroundColor: const Color(0xFF1F003D),
       body: Stack(
@@ -136,17 +138,34 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(24)),
                     margin: const EdgeInsets.only(top: 10),
                     child: Row(
-                      children: const [
-                        Icon(Icons.search, color: Colors.white),
-                        SizedBox(width: 8),
+                      children: [
+                        const Icon(Icons.search, color: Colors.white),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: TextField(
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
+                            controller: searchController,
+                            style: const TextStyle(color: Colors.white),
+                            decoration: const InputDecoration(
                                 hintText: 'Search cards...',
                                 hintStyle: TextStyle(color: Colors.white54),
                                 border: InputBorder.none),
+                            onSubmitted: (value) {
+                              final trimmed = value.trim();
+                              if (trimmed.isEmpty) return;
+                              Navigator.pushNamed(
+                                context,
+                                "/searchPage",
+                                arguments: {"query": trimmed},
+                              );
+                            },
                           ),
+                        ),
+                        const SizedBox(width: 8),
+                        GestureDetector(
+                          onTap: () {
+                            searchController.clear();
+                          },
+                          child: const Icon(Icons.close, color: Colors.white54),
                         ),
                       ],
                     ),
@@ -215,9 +234,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 child: Center(
-                  child: Text(title,
-                      style: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold)),
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                    )
+                  ),
                 ),
               ),
             ),
@@ -255,12 +278,12 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                       Image.asset(
-                                      "assets/icons/dollar-icon.png",
-                                      width: 20,
-                                      height: 20,
-                                    ),
-                                      SizedBox(width: 5),
+                      Image.asset(
+                        "assets/icons/dollar-icon.png",
+                        width: 20,
+                        height: 20,
+                      ),
+                      const SizedBox(width: 5),
                       Flexible(
                         child: Text(price.toStringAsFixed(2),
                             style: const TextStyle(color: Colors.white, fontSize: 18),
@@ -309,7 +332,6 @@ class TrendCard extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: () {
-        // Navigate to details screen, you can pass title as argument
         Navigator.pushNamed(context, '/leaseDetail');
       },
       child: ClipRRect(
@@ -356,4 +378,3 @@ class TrendCard extends StatelessWidget {
     );
   }
 }
-
